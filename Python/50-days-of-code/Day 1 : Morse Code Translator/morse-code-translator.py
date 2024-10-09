@@ -88,12 +88,14 @@ morse_code = {
 def translate(latin_string) : 
     length = len(latin_string)
     count = 0
+    morse_string = ""
     while count >= length - 1 : 
         character = morse_code[latin_string[count]]
         morse_string = morse_string + character + " "
         count += 1
-    return morse_string
+    print(morse_string)
 
 # Execution
-output = translate(input("Enter a string to convert to Morse code : "))
-print(output)
+while 0 != 1 :
+    output = translate(input("Enter a string to convert to Morse code : "))
+    print(output)
