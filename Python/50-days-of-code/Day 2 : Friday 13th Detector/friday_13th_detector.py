@@ -16,4 +16,4 @@ else :
 # - I forgot to import date from datetime.
 
 # Possibles improvements : 
-# - Nothing i think.
+# - Nothing I think.
