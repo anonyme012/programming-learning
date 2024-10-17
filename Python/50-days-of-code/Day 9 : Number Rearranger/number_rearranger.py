@@ -39,7 +39,7 @@ while True :
     difference = int(largest_number) - int(smallest_number)
 
 # Output
-    print("For the number" + number + ", the largest number we can compose with his digits is " + str(largest_number) + " and the smallest is " + str(smallest_number) + ".")
+    print("For the number " + number + ", the largest number we can compose with his digits is " + str(largest_number) + " and the smallest is " + str(smallest_number) + ".")
     print("So, their difference is : " + str(difference) + ".")
 
 # My errors during programming : 
