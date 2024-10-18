@@ -15,10 +15,11 @@ I'm using this GitHub repository to host my notes and projects as I learn progra
 ##### Day 7: [Shadow Sentences Verificator](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%207%20%3A%20Shadow%20Sentences%20Verificator)
 ##### Day 8 : [Tic Tac Toe Blocker](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%208%20%3A%20Tic%20Tac%20Toe%20Blocker)
 ##### Day 9 : [Number Rearranger](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%209%20%3A%20Number%20Rearranger)
-##### Day 10 : [Duplicate Letters Checker]()
+##### Day 10 : [Duplicate Letters Checker](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2010%20%3A%20Duplicate%20Letters%20Checker)
 
 ### My Notes
 ##### [Python Knowledge Database](https://github.com/anonyme012/programming-learning/blob/main/Python/notes/python_knowledge_database.md)
+##### [Python Libraries](https://github.com/anonyme012/programming-learning/blob/main/Python/notes/python_libraries.md)
 
 ## HTML
 
