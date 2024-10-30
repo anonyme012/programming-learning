@@ -16,6 +16,16 @@ I'm using this GitHub repository to host my notes and projects as I learn progra
 ##### Day 8 : [Tic Tac Toe Blocker](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%208%20%3A%20Tic%20Tac%20Toe%20Blocker)
 ##### Day 9 : [Number Rearranger](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%209%20%3A%20Number%20Rearranger)
 ##### Day 10 : [Duplicate Letters Checker](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2010%20%3A%20Duplicate%20Letters%20Checker)
+##### Day 11 : [Random Number Generator](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2011%20%3A%20Random%20Number%20Generator)
+##### Day 12 : [Type Check](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2012%20%3A%20Type%20Check)
+##### Day 13 : [Middle Letter Finder](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2013%20%3A%20Middle%20Letter%20Finder)
+##### Day 14 : [Online Status Counter](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2014%20%3A%20Online%20Status%20Counter)
+##### Day 15 : [Dots Adder and Remover](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2015%20%3A%20Dots%20Adder%20and%20Remover)
+##### Day 16 : [Syllables Counter](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2016%20%3A%20Syllables%20Counter)
+##### Day 17 : [Anagrams Checker](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2017%20%3A%20Anagrams%20Checker)
+##### Day 18 : [List Flattener](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2018%20%3A%20List%20Flattener)
+##### Day 19 : [**Short** Number to String Converter](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2019%20%3A%20Short%20Number%20to%20String%20Converter)
+##### Day 20 : [List Exclusivity Check](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2020%20%3A%20Lists%20Exclusivity%20Check)
 
 ### My Notes
 ##### [Python Knowledge Database](https://github.com/anonyme012/programming-learning/blob/main/Python/notes/python_knowledge_database.md)
