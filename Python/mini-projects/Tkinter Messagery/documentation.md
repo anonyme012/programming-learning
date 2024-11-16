@@ -2,6 +2,12 @@
 
 A GUI interface to send text messages through Internet between 2 users.
 
+## Use Guide
+1. Launch the program.
+2. Configure the IP of your correspondant and other settings if necessary.
+3. To send a message, type it in the field provided for this purpose. Then click on the "Send" button.
+4. You will recieve almost instantly your correspondant's messages.
+
 ## Features
 - Text messages only
 - Instant reception
@@ -13,20 +19,6 @@ A GUI interface to send text messages through Internet between 2 users.
 - Python 3
 - Tkinter
 - `socket` library
-
-## Interface
-
-### Chat Page
-![Chat Page Model](img/chat_page.jpg)
-Prototype
-
-### Settings Page
-![Settings Page Model](img/settings_page.jpg)
-Prototype
-
-### Docs Page
-![Docs Page Model](img/docs_page.jpg)
-Prototype
 
 ## Prerequisites
 
@@ -111,16 +103,34 @@ print("something", var, sep = ".")
 ```
 Without backslashes (`\`).
 
-## About
+## Improvements
+Possibles improvements for this project are : 
+- Possibility to use with more than 2 users.
+- More beautiful UI. It's already but...
 
+## Interface
+
+### Prototypes
+
+#### Chat Page
+![Chat Page Model](img/chat_page.jpg)
+
+#### Settings Page
+![Settings Page Model](img/settings_page.jpg)
+
+#### Docs Page
+![Docs Page Model](img/docs_page.jpg)
+
+### Final Result
+
+...
+
+## About
 I created this software in my spare time as part of my self-taught learning of the Python programming language.
 I used the `socket`, `tkinter` modules and Python 3.13 (latest version at the time of writing).
-Once my skills in this area are broader, I would like to add some features as described in [## Improvements](#improvements).
-
-## Improvements
+Once my skills in this area are broader, I would like to add some features as described in [# Improvements](#improvements).
 
 ## Licence
-
 MIT License
 
 Copyright (c) [2024] [Nil / anonyme012 (https://github.com/anonyme012)]

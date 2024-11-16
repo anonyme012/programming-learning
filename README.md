@@ -27,6 +27,14 @@ I'm using this GitHub repository to host my notes and projects as I learn progra
 ##### Day 19 : [**Short** Number to String Converter](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2019%20%3A%20Short%20Number%20to%20String%20Converter)
 ##### Day 20 : [List Exclusivity Check](https://github.com/anonyme012/programming-learning/tree/main/Python/50-days-of-code/Day%2020%20%3A%20Lists%20Exclusivity%20Check)
 
+### Mini-projects
+##### [Tkinter Messagery](https://github.com/anonyme012/programming-learning/tree/main/Python/mini-projects/Tkinter%20Messagery)
+##### [Drawing Programming Language](https://github.com/anonyme012/programming-learning/tree/main/Python/mini-projects/Drawing%20Programming%20Language)
+##### [Tic-Tac-Toe XXL](https://github.com/anonyme012/programming-learning/tree/main/Python/mini-projects/Tic-Tac-Toe%20XXL)
+##### [Audio Morse Translator](https://github.com/anonyme012/programming-learning/tree/main/Python/mini-projects/Audio%20Morse%20Translator)
+##### [Pong Game](https://github.com/anonyme012/programming-learning/tree/main/Python/mini-projects/Pong%20Game)
+##### [Cryptographic Suite](https://github.com/anonyme012/programming-learning/tree/main/Python/mini-projects/Cryptographic%20Suite)
+
 ### My Notes
 ##### [Python Knowledge Database](https://github.com/anonyme012/programming-learning/blob/main/Python/notes/python_knowledge_database.md)
 ##### [Python Libraries](https://github.com/anonyme012/programming-learning/blob/main/Python/notes/python_libraries.md)
