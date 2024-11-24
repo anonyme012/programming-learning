@@ -3,9 +3,11 @@
 #############
 
 import socket
-import tkinter as tk
 import threading
 import markdown as md
+import tkinter as tk
+from tkinter.scrolledtext import ScrolledText
+from requests import get
 from tkinterweb import HtmlFrame
 
 ############
@@ -47,10 +49,16 @@ def open_settings_window() :
     label_setting_5.grid(row = 4, column = 0, sticky = "w")
     selector_setting_5.grid(row = 4, column = 1, sticky = "w")
 
-    quit_save_button = tk.Button(settings_window, text = "Close & Save", command = settings_window.destroy)
-    quit_save_button.grid(row = 5, column = 0, columnspan = 3, pady = 10)
-    relaunch_button = tk.Button(settings_window, text = "Relaunch Sockets", command = socket_restarting_sequence)
-    relaunch_button.grid(row = 6, column = 0, columnspan = 3, pady = 10)
+    buttons_frame = tk.Frame(settings_window)
+    buttons_frame.grid(row = 5, column = 0, columnspan = 3, pady = 10)
+    launch_button = tk.Button(buttons_frame, text = "Launch Server", bg = "green", command = server_launching_sequence)
+    launch_button.grid(row = 0, column = 0, pady = 10)
+    connect_button = tk.Button(buttons_frame, text = "Connect", bg = "green", command = start_client)
+    connect_button.grid(row = 0, column = 1, pady = 10)
+    show_ip_button = tk.Button(buttons_frame, text = "Show IP", command = display_ip_address)
+    show_ip_button.grid(row = 0, column = 2, pady = 10)
+    quit_save_button = tk.Button(settings_window, text = "Close & Save", bg = "red", command = settings_window.destroy)
+    quit_save_button.grid(row = 6, column = 0, columnspan = 3, pady = 10)
 
 def open_documentation_window() : 
     documentation_text_var = """# Documentation
@@ -62,40 +70,7 @@ def open_documentation_window() :
     documentation_frame.load_html(md.markdown(documentation_text_var))
     documentation_frame.pack(fill = "both", expand = True)
 
-### Socket Functions ###
-
-def socket_lauching_sequence() : 
-    try : 
-        global server_thread
-        server_thread = threading.Thread(target = start_server, daemon = True)
-        server_thread.start()
-        start_client()
-    except Exception as e : 
-        print(f"Error in socket_lauching_sequence : {e}")
-
-def socket_closing_sequence() : 
-    try : 
-        client_socket.close()
-        client_socket.shutdown(socket.SHUT_RDWR)
-        server_socket.close()
-        server_socket.shutdown(socket.SHUT_RDWR)
-    except Exception as e : 
-        print(f"Error in socket_closing_sequence : {e}")
-
-def socket_restarting_sequence() : 
-    socket_closing_sequence()
-    socket_lauching_sequence()
-
-def app_closing_sequence() : 
-    try : 
-        # Closing Sockets
-        socket_closing_sequence()
-        # Closing Windows
-        main_window.destroy()
-        settings_window.destroy()
-        documentation_window.destroy()
-    except Exception as e : 
-        print(f"Error in app_closing_sequence : {e}")
+##### Server #####
 
 def start_server() : 
     try : 
@@ -104,14 +79,39 @@ def start_server() :
         server_socket.bind(("", int(COMMUNICATION_PORT.get())))
         server_socket.listen(1)
         conn, addr = server_socket.accept()
-        print(f"Connected to {addr}")
+        tk.messagebox.showinfo("Successful", f"Server connected to {addr}")
         while True : 
             data = conn.recv(1024).decode()
             if not data : 
                 break
             messages_text_module.insert("end", f"\n\nYour correspondant : \n{data}")
     except Exception as e : 
-        print(f"Server error : {e}")
+        tk.messagebox.showinfo("Server Error", "Unknown Server Error : \n\n" + str(e))
+
+def server_launching_sequence() : 
+    server_closing_sequence()
+    try : 
+        global server_thread
+        server_thread = threading.Thread(target = start_server)
+        server_thread.start()
+    except Exception as e : 
+        print(f"Error in server_launching_sequence : {e}")
+
+def server_closing_sequence() : 
+    try : 
+        server_socket.close()
+    except Exception as e : 
+        print(f"Error in server_closing_sequence : {e}")
+    try : 
+        server_socket.shutdown(socket.SHUT_RDWR)
+    except Exception as e : 
+        print(f"Error in server_closing_sequence : {e}")
+    try : 
+        server_thread.join(2)
+    except Exception as e : 
+        print(f"Error in server_closing_sequence : {e}")
+
+##### Client #####
 
 def start_client() : 
     try : 
@@ -119,7 +119,45 @@ def start_client() :
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((CORRESPONDANT_IP.get(), int(COMMUNICATION_PORT.get())))
     except Exception as e : 
-        print(f"Client error : {e}")
+        tk.messagebox.showerror("Client Error", "Impossible to connect to the server : \n\n" + str(e))
+
+def client_closing_sequence() : 
+    try : 
+        client_socket.close()
+    except Exception as e : 
+        print(f"Error in client_closing_sequence : {e}")
+    try : 
+        client_socket.shutdown(socket.SHUT_RDWR)
+    except Exception as e : 
+        print(f"Error in client_closing_sequence : {e}")
+
+##### General #####
+
+def socket_closing_sequence() : 
+    server_closing_sequence()
+    client_closing_sequence()
+
+def app_closing_sequence() : 
+    # Closing Sockets
+    try : 
+        socket_closing_sequence()
+    except Exception as e : 
+        print(f"Error in app_closing_sequence : {e}")
+    # Closing Windows
+    try : 
+        main_window.destroy()
+    except Exception as e : 
+        print(f"Error in app_closing_sequence : {e}")
+    try : 
+        settings_window.destroy()
+    except Exception as e : 
+        print(f"Error in app_closing_sequence : {e}")
+    try : 
+        documentation_window.destroy()
+    except Exception as e : 
+        print(f"Error in app_closing_sequence : {e}")
+
+##### Special #####
 
 def send_message() : 
     try : 
@@ -127,18 +165,17 @@ def send_message() :
         message_textbox.delete("1.0", "end")
         client_socket.sendall(content.encode())
     except Exception as e : 
-        print(f"Error in send_message : {e}")
+        tk.messagebox.showwarning("Message Not Sent", "Impossible to send the message : \n\n" + str(e))
     else : 
         messages_text_module.insert("end", f"\n\nMe : \n{content}")
 
-def get_local_ipv4_address() : 
+def display_ip_address() : 
     try : 
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s : 
-            s.connect(("8.8.8.8", 80))
-            return s.getsockname()[0]
+        ipv4_response = get('https://api.ipify.org').text
+        ipv6_response = get('https://api6.ipify.org').text
+        tk.messagebox.showinfo("Show IP Address", "Your IPv4 address is : " + format(ipv4_response) + "\nYour IPv6 address is : " + format(ipv6_response))
     except Exception as e : 
-        return f"Error : {e}"
-# To use later
+        tk.messagebox.showerror("IP Address Error", "Impossible to get your IP address : \n\n" + str(e))
 
 ######################
 # Launching Sequence #
@@ -161,9 +198,6 @@ TIME_FORMAT = tk.IntVar(master = settings_window, value=24)
 MARKDOWN_SUPPORT = tk.BooleanVar(master = settings_window, value = False)
 ENCRYPTION_PASSWORD = tk.StringVar(master = settings_window, value = "")
 settings_window.destroy()
-
-# Launching
-socket_lauching_sequence()
 
 #######
 # GUI #
@@ -188,9 +222,9 @@ messages_frame = tk.Frame(main_window, bd = 2, relief = tk.SOLID)
 messages_text_module = tk.Text()
 
 # Type & Send
-message_composition_frame = tk.Frame(main_window, relief = tk.SOLID, bd = 2) # BG
+message_composition_frame = tk.Frame(main_window, relief = tk.SOLID, bd = 2)
 message_composition_frame.pack(fill = "x", side = tk.BOTTOM)
-message_textbox = tk.Text(message_composition_frame, bd = 1)
+message_textbox = ScrolledText(message_composition_frame, wrap="word")
 message_textbox.pack()
 send_button = tk.Button(message_composition_frame, text = "Send", command = send_message)
 send_button.pack()
@@ -201,23 +235,21 @@ send_button.pack()
 
 main_window.mainloop()
 
-close_connection()
-
-#############
-# Todo List #
-#############
+###########################
+# Todo List (by priority) #
+###########################
 
 # ++ Add messages time
-# ++ Add scrollbars in Documentation & Messages
-# +  Error Management in every function + global
 # +  Fill the Documentation Page
-#    Add a way to see our own IP to share with our correspondant.
-#    Add console logs
+#    Add more console logs & a GUI debugging mode
 # -  Proper exit everywhere
 # -  Add input verification
-# -  Add encryption
+# -  Add AES-256 encryption support
 # -  Add colors and formatting for a better understanding
+# -  Add possibility to change the time format
 # -- Add Markdown support
+# -- Add the possiblity to send files
+# -- Add the possiblity to use with roups of more than 2 people
 
 ########
 # Bugs #
