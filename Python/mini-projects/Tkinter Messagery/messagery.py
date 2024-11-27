@@ -75,7 +75,7 @@ def open_documentation_window() :
 def start_server() : 
     try : 
         global server_socket
-        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_socket = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
         server_socket.bind(("", int(COMMUNICATION_PORT.get())))
         server_socket.listen(1)
         conn, addr = server_socket.accept()
@@ -117,9 +117,21 @@ def start_client() :
     try : 
         global client_socket
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.settimeout(5)
         client_socket.connect((CORRESPONDANT_IP.get(), int(COMMUNICATION_PORT.get())))
+    except socket.timeout as e : 
+        tk.messagebox.showerror("Timeout", "Timeout detected for the connection : \n\n" + str(e))
     except Exception as e : 
         tk.messagebox.showerror("Client Error", "Impossible to connect to the server : \n\n" + str(e))
+
+def client_launching_sequence() : 
+    client_closing_sequence()
+    try : 
+        global client_thread
+        client_thread = threading.Thread(target = start_client)
+        client_thread.start()
+    except Exception as e : 
+        print(f"Error in client_launching_sequence : {e}")
 
 def client_closing_sequence() : 
     try : 
@@ -128,6 +140,10 @@ def client_closing_sequence() :
         print(f"Error in client_closing_sequence : {e}")
     try : 
         client_socket.shutdown(socket.SHUT_RDWR)
+    except Exception as e : 
+        print(f"Error in client_closing_sequence : {e}")
+    try : 
+        client_thread.join(2)
     except Exception as e : 
         print(f"Error in client_closing_sequence : {e}")
 
@@ -240,6 +256,7 @@ main_window.mainloop()
 ###########################
 
 # ++ Add messages time
+# ++ Dynamic IPv4 and IPv6 detection for socket support
 # +  Fill the Documentation Page
 #    Add more console logs & a GUI debugging mode
 # -  Proper exit everywhere
